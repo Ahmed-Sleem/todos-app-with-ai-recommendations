@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOs</title>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+    
+        .Frame1 {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            background: white;
+        }
+    
+        .todoinput {
+            outline: none; /* Remove the selection border */
+        }
+    
+        .Rectangle3 {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    
+        .Title {
+            left: 0px;
+            top: 0px;
+            position: absolute;
+            color: black;
+            font-size: 30px;
+            font-weight: 600;
+            word-wrap: break-word;
+            overflow: hidden;    /* Prevent text overflow */
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+    
+        .ApiSection {
+            width: 477px;
+            height: 39px;
+            left: 695px;
+            top: 548px;
+            position: absolute;
+        }
+    
+        .Api {
+            width: 477px;
+            height: 39px;
+            right: 0px;
+            top: 0px;
+            position: absolute;
+            
+            border-radius: 10px;
+        }
+    
+        .ApiKey {
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border: none; /* Remove border */
+            border-radius: inherit;
+            padding: 0;
+            font-size: inherit;
+            font-family: inherit;
+            color: inherit;
+            outline: none; /* Remove the selection border */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    
+        .RecommendationsSection {
+            width: 200px;
+            
+            margin-top: 200px;
+            position:absolute;
+            
+        }
+    
+        .RecommendationsItems {
+            width: 100%;
+            
+           
+            
+        }
+    
+        .RecommendationItem {
+            width: 477px;
+            height: 150px;
+            margin-top: 10px;
+            word-wrap: break-word;
+            color:#6f6f6f;
+            border-radius: 10px;
+            transition: 0.2s ease;
+            overflow-wrap: break-word;
+            overflow-y: scroll;
+            text-decoration: none;
+
+            
+            
+        }
+        .RecommendationItem:hover {
+
+            color: #000;
+        }
+    
+        .Recommendations {
+            
+            
+            color: #9B9B9B;
+            font-size: 18px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
+    
+        .TodoSection {
+            height: 285px;
+            left: 298px;
+            top: 26px;
+            position: absolute;
+        }
+    
+        .TodoBody {
+            width: 477px;
+            height: 100px;
+            left: 0px;
+            top: 53px;
+            position: absolute;
+            background: white;
+            border-radius: 10px;
+            transition: 0.2s ease;
+            overflow-wrap: break-word;
+            overflow-y: scroll;
+            
+
+            
+            
+            padding: 10px;
+        }
+        .TodoBody:hover{
+
+            opacity: 60%;
+            transition: 0.3s ease;
+
+
+        }
+
+        
+    
+        .Title {
+            left: 0px;
+            top: 0px;
+            position: absolute;
+            color: black;
+            font-size: 30px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
+    
+        .SideMenu {
+            width: 280px;
+            height: 600px;
+            left: 0px;
+            top: 0px;
+            position: absolute;
+            background: rgb(255, 255, 255);
+            border-radius: 18px;
+            overflow: hidden; /* Hide overflow to prevent scrollbars */
+            
+        }
+    
+        .TodosList {
+            width: 240px;
+            left: 20px;
+            top: 90px;
+            position: absolute;
+            bottom: 20px;
+            overflow: hidden; /* Hide overflow to prevent scrollbars */
+        }
+    
+        .TodoItems {
+            width: 100%;
+            overflow-y: auto; /* Enable vertical scrolling */
+            height: calc(100% - 59px); /* Adjust height to fit container */
+            padding-right: 10px; /* Add right padding to compensate for scrollbar width */
+            font-size: medium;
+        }
+    
+        /* Custom scrollbar style */
+        .TodoItems::-webkit-scrollbar {
+            width: 0; /* Hide the scrollbar */
+        }
+    
+        /* Optional: scrollbar track */
+        .TodoItems::-webkit-scrollbar-track {
+            background: transparent; /* Optional: Set a background color */
+        }
+    
+        /* Optional: scrollbar thumb */
+        .TodoItems::-webkit-scrollbar-thumb {
+            background: #888; /* Optional: Set a scrollbar thumb color */
+        }
+    
+        .Item {
+            width: 100%;
+            height: 20px;
+            margin-bottom: 13px; /* Set margin between items to 13px */
+            position: relative; /* Ensure absolute positioned elements are relative to this container */
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Use transform for smoother transitions */
+        }
+        .Item:hover {
+            opacity: 80%;
+
+        }
+
+        
+
+        .Item.initial {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+
+        .Rectangle3 {
+            width: 100%;
+            height: 39px;
+            border-radius: 10px;
+            position: relative; /* Ensure absolute positioned elements are relative to this container */
+        }
+
+
+    
+        .EditableTodo {
+            width: calc(100% - 30px); /* Adjust width to account for margin and button */
+            height: 100%;
+            background: inherit;
+            border: none; /* Remove border */
+            border-radius: inherit;
+            padding: 0;
+            font-size: inherit;
+            font-family: inherit;
+            color: inherit;
+            margin-left: 8px; /* Add margin to the left */
+            outline: none; /* Remove the selection border */
+        }
+    
+        .CompleteButton {
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            right: 8px;
+            top: 12px;
+            border-radius: 9999px;
+            border: 2px black solid;
+            background: white; /* Ensure button is visible on colored backgrounds */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+    
+        .CompleteButton:hover {
+            background: black;
+            color: white;
+        }
+    
+        .Todos {
+            left: 0px;
+            top: 0px;
+            position: absolute;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
+    
+        .AddTodo {
+            width: 240px;
+            height: 39px;
+            left: 20px;
+            top: 24px;
+            position: absolute;
+        }
+
+    
+        .todoinput {
+            width: 190px;
+            height: 30px;
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            border: 2px solid #000000; /* Added border */
+            color: rgb(0, 0, 0);
+            transition: 0.3s ease;
+
+
+
+        }
+    
+        .ApiKey::placeholder {
+            color: #000; /* Change placeholder text color to gray */
+        }
+
+        .todoinput::placeholder {
+            color: #bcbcbc; /* Change placeholder text color to gray */
+            
+        }
+        .todoinput:focus {
+            width: 235px;
+            height: 35px;
+            transition: 0.3s ease;            
+            
+        }
+        .todoinput:hover {
+            background: #f2f2f2;
+            
+        }
+
+
+    
+        #settings {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            font-size: 16px;
+            
+            font-weight: 600;
+            color: white;
+            background-color: #000000;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            
+        }
+
+        #settings:hover {
+            background-color: #e5e5e5;
+            transform: scale(1.05);
+            color: #000;
+        }
+
+        #settings:active {
+            background-color: #f2f2f2;
+            transform: scale(0.95);
+        }
+
+
+        .AddButton {
+            width: 17px;
+            height: 17px;
+            position: absolute;
+            right: 10px;
+            top: 12px;
+            
+            border-radius: 9999px;
+            border: 2px black solid;
+            background: white; /* Ensure button is visible on colored backgrounds */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .AddButton:hover {
+            background: rgb(68, 176, 56);
+            color: white;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="Frame1">
+        <div class="ApiSection">
+            <div class="Api">
+                <a id="settings" href="settings.html">Settings</a>
+            </div>
+        </div>
+        
+        <div class="TodoSection">
+            <div class="Title">TITLE</div>
+            <div class="TodoBody"></div>
+            
+            <div class="RecommendationsSection">
+                <div class="Recommendations">Recommendations</div>
+                <div class="RecommendationsItems">
+                    <!-- Recommendations will be dynamically added here -->
+                </div>
+                
+                
+            </div>
+            
+            
+        </div>
+        <div class="SideMenu">
+            <div class="TodosList">
+                <div class="Todos">TODOs: </div>
+                <br><br>
+                <div class="TodoItems">
+                    <!-- Todo items will be dynamically added here -->
+                </div>
+            </div>
+            <div class="AddTodo">
+                <input type="text" class="todoinput" placeholder=" new item" >
+                <button class="AddButton"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const addTodoButton = document.querySelector('.AddButton');
+            const todoInput = document.querySelector('.todoinput');
+            const todoItemsContainer = document.querySelector('.TodoItems');
+            const todoBody = document.querySelector('.TodoBody');
+            const titleText = document.querySelector('.Title');
+            const recommendationContainer = document.querySelector('.RecommendationsItems');
+    
+            const colors = ['#FF928B', '#BAD7F2', '#FEC3A6', '#EFE9AE', '#CDEAC0'];
+    
+            let todos = await window.api.loadTodos();
+    
+            todos.forEach(todo => {
+                const newItem = createTodoItem(todo);
+                todoItemsContainer.appendChild(newItem);
+                updateItemPositions();
+                setTimeout(() => {
+                    newItem.classList.remove('initial');
+                }, 50);
+            });
+    
+            addTodoButton.addEventListener('click', async function () {
+                const todoText = todoInput.value.trim();
+    
+                if (todoText !== '') {
+                    const newTodo = { id: Date.now(), content: todoText, recommendation: "" };
+                    todos.push(newTodo);
+    
+                    const newItem = createTodoItem(newTodo);
+                    todoItemsContainer.appendChild(newItem);
+                    updateItemPositions();
+                    todoInput.value = '';
+    
+                    setTimeout(() => {
+                        newItem.classList.remove('initial');
+                    }, 50);
+    
+                    const recommendation = await window.api.getRecommendation(todoText);
+                    newTodo.recommendation = recommendation;
+                    window.api.saveTodos(todos);
+                }
+            });
+    
+            function createTodoItem(todo) {
+                const newItem = document.createElement('div');
+                newItem.classList.add('Item', 'initial');
+    
+                const newRectangle = document.createElement('div');
+                newRectangle.classList.add('Rectangle3');
+                const itemColor = getRandomColor();
+                newRectangle.style.background = itemColor;
+                newItem.appendChild(newRectangle);
+    
+                const newTodoInput = document.createElement('input');
+                newTodoInput.type = 'text';
+                newTodoInput.value = todo.content;
+                newTodoInput.classList.add('EditableTodo');
+                newTodoInput.addEventListener('input', async function () {
+                    todo.content = newTodoInput.value;
+                    todoBody.textContent = newTodoInput.value;
+                    const truncatedTitle = truncateTitle(newTodoInput.value, 20);
+                    titleText.textContent = truncatedTitle;
+                    await window.api.saveTodos(todos);
+                });
+                newRectangle.appendChild(newTodoInput);
+    
+                const newButton = document.createElement('button');
+                newButton.classList.add('CompleteButton');
+                newButton.addEventListener('click', async function () {
+                    newItem.style.opacity = '0';
+                    updateItemPositions();
+                    setTimeout(() => {
+                        newItem.remove();
+                        todos = todos.filter(t => t.id !== todo.id);
+                        updateItemPositions();
+                        window.api.saveTodos(todos);
+                    }, 300);
+                });
+                newRectangle.appendChild(newButton);
+    
+                newItem.addEventListener('click', function () {
+                    todoBody.textContent = todo.content;
+                    const truncatedTitle = truncateTitle(todo.content, 20);
+                    titleText.textContent = truncatedTitle;
+                    if (todo.recommendation) {
+                        recommendationContainer.innerHTML = `<div class="RecommendationItem">${todo.recommendation}</div>`;
+                    } else {
+                        recommendationContainer.innerHTML = '';
+                    }
+                });
+    
+                return newItem;
+            }
+    
+            function updateItemPositions() {
+                const todoItems = todoItemsContainer.querySelectorAll('.Item');
+                let topPosition = 0;
+                todoItems.forEach((item) => {
+                    item.style.transform = `translateY(${topPosition}px)`;
+                    topPosition += item.offsetHeight;
+                });
+            }
+    
+            function getRandomColor() {
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+    
+            function truncateTitle(text, maxLength) {
+                if (text.length > maxLength) {
+                    return text.substring(0, maxLength) + '...';
+                }
+                return text;
+            }
+        });
+    </script>
+    
+</body>
+
+</html>

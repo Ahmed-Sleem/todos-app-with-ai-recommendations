@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+
+        .Frame1 {
+            width: 800px;
+            height: 600px;
+            background: white;
+            
+            overflow: hidden;
+            position: relative;
+            display: flex;
+        }
+
+        .SideMenu {
+            width: 280px;
+            height: 560px; /* Reduced height to show floating effect */
+            background: black;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            border-radius: 18px;
+            margin: 20px; /* Margin to create floating effect */
+        }
+
+        .SettingsSection {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .SettingsTitle {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .SettingItem {
+            margin-bottom: 20px;
+        }
+
+        .SettingLabel {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .TextboxInput {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .TextboxInput:focus {
+            border-color: #888;
+        }
+
+        #back {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #back:hover {
+            background-color: #e4e4e4;
+            transform: scale(1.05);
+            color: rgb(0, 0, 0);
+        }
+
+        #back:active {
+            background-color: #eeeeee;
+            transform: scale(0.95);
+        }
+
+        #saveApiKey {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #saveApiKey:hover {
+            background-color: #e4e4e4;
+            transform: scale(1.05);
+            color: rgb(0, 0, 0);
+        }
+
+        #saveApiKey:active {
+            background-color: #eeeeee;
+            transform: scale(0.95);
+        }
+
+        .link {
+
+            font-weight: 600;
+            color: rgb(255, 255, 255);
+            border: none;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+
+        }
+        .link:hover {
+            color: rgb(209, 209, 209);
+        }
+
+        .link:active {
+            color: rgb(241, 241, 241);
+            
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="Frame1">
+        
+        <div class="SettingsSection">
+            <div class="SettingsTitle">Settings</div>
+            <div class="SettingItem">
+                <label class="SettingLabel" for="apiKey">API KEY</label>
+                <input id="apiKey" class="TextboxInput" type="password">
+ 
+                <button  id="saveApiKey" onclick="saveApiKey()">Save</button>
+
+
+            </div>
+            <div class="SettingItem">
+                <label class="SettingLabel" for="developedBy">Developed by</label>
+                <div id="developedBy" class="TextboxInput"  >linkedin.com/in/ahmedsleem-</div>
+                <a id="back" href="index.html">Back</a>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        function saveApiKey() {
+            const apiKeyInput = document.getElementById("apiKey");
+            const apiKey = apiKeyInput.value.trim();
+
+            if (!apiKey) {
+                alert("Please enter an API key.");
+                return;
+            }
+
+            // Send the API key to the main process
+            window.api.send("save-api-key", apiKey);
+        }
+    </script>
+    <script src="./preload.js"></script>
+    
+</body>
+</html>
